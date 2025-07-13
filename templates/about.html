@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ t.about }} - {{ t.title }}</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Flag Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            background-size: 200% 200%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            border-radius: 16px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+        
+        .btn-hover {
+            transition: all 0.3s ease;
+            background-size: 200% auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-hover:hover {
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 3rem;
+            width: 3rem;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            right: 0;
+        }
+
+        .language-dropdown:hover .language-dropdown-content {
+            display: block;
+        }
+
+        .language-option {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #333;
+            transition: all 0.2s;
+        }
+
+        .language-option:hover {
+            background-color: #f1f1f1;
+        }
+
+        .language-active {
+            background-color: #f1f5ff;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+    <div class="gradient-bg text-white shadow-lg">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-video text-2xl mr-2 floating"></i>
+                <span class="font-bold text-xl">{{ t.title }}</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="{{ url_for('index') }}" class="hover:text-gray-200 transition-all duration-300 font-medium">{{ t.home }}</a>
+                <a href="{{ url_for('about') }}" class="hover:text-gray-200 transition-all duration-300 font-medium">{{ t.about }}</a>
+                <div class="language-dropdown">
+                    <button class="flex items-center hover:text-gray-200 transition-all duration-300 font-medium">
+                        <i class="fas fa-globe mr-2"></i>
+                        {{ t.language }}
+                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div class="language-dropdown-content">
+                        <a href="{{ url_for('set_language', lang='en') }}" class="language-option {% if lang == 'en' %}language-active{% endif %} flex items-center">
+                            <span class="fi fi-gb mr-2"></span>English
+                        </a>
+                        <a href="{{ url_for('set_language', lang='tr') }}" class="language-option {% if lang == 'tr' %}language-active{% endif %} flex items-center">
+                            <span class="fi fi-tr mr-2"></span>Türkçe
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container mx-auto px-6 py-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-12 card" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="text-4xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">{{ t.about }} {{ t.title }}</h1>
+                
+                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl border border-indigo-100 mb-8" data-aos="fade-up" data-aos-delay="200">
+                    <p class="text-indigo-700">
+                        {{ t.about_description }}
+                    </p>
+                </div>
+                
+                <div class="space-y-8" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-start">
+                        <div class="feature-icon mr-4 mt-1">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ t.about_mission_title }}</h2>
+                            <p class="text-gray-600">{{ t.about_mission_text }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start" data-aos="fade-up" data-aos-delay="400">
+                        <div class="feature-icon mr-4 mt-1">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ t.about_tech_title }}</h2>
+                            <p class="text-gray-600">{{ t.about_tech_text }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start" data-aos="fade-up" data-aos-delay="500">
+                        <div class="feature-icon mr-4 mt-1">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ t.about_privacy_title }}</h2>
+                            <p class="text-gray-600">{{ t.about_privacy_text }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl shadow-xl p-8 text-white text-center card" data-aos="fade-up" data-aos-delay="600">
+                <h2 class="text-3xl font-bold mb-4">{{ t.about_start_title }}</h2>
+                <p class="text-lg mb-6 opacity-90">{{ t.about_start_text }}</p>
+                <a href="{{ url_for('index') }}" class="inline-block bg-white text-indigo-600 font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    {{ t.start_downloading }}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="gradient-bg text-white py-10 mt-16">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center justify-center md:justify-start">
+                        <i class="fas fa-video text-2xl mr-2 floating"></i>
+                        <span class="font-bold text-xl">{{ t.title }}</span>
+                    </div>
+                    <p class="mt-2 text-sm opacity-80">{{ t.footer_text }}</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white hover:text-gray-200 transition-all duration-300 transform hover:scale-110">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-gray-200 transition-all duration-300 transform hover:scale-110">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-gray-200 transition-all duration-300 transform hover:scale-110">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-white border-opacity-20 text-center text-sm opacity-70">
+                <p>{{ t.copyright }}</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS animations
+            AOS.init();
+        });
+    </script>
+</body>
+</html> 
