@@ -261,7 +261,11 @@ def transcode_video(filepath, instagram_compatible=False):
             '-c:a', 'aac',
             '-b:a', '128k',
             '-ar', '44100',
-            '-ac', '2'
+            '-ac', '2',
+            '-map_metadata', '-1',
+            '-metadata', 'title=HD Reels Downloader',
+            '-metadata', 'artist=seghobs',
+            '-metadata', 'comment=Downloaded via reelsdownloadHDv2'
         ])
     else:
         ffmpeg_cmd.extend([
@@ -270,7 +274,11 @@ def transcode_video(filepath, instagram_compatible=False):
             '-preset', 'slow',
             '-pix_fmt', 'yuv420p',
             '-c:a', 'aac',
-            '-b:a', '256k'
+            '-b:a', '256k',
+            '-map_metadata', '-1',
+            '-metadata', 'title=HD Reels Downloader',
+            '-metadata', 'artist=seghobs',
+            '-metadata', 'comment=Downloaded via reelsdownloadHDv2'
         ])
     
     ffmpeg_cmd.append(temp_output_path)
