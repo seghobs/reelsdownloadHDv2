@@ -14,82 +14,112 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
+            background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 50%, #ecfdf5 100%);
+            background-size: 300% 300%;
+            animation: bgShift 20s ease infinite;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Outfit', sans-serif;
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-            background-size: 200% 200%;
-            animation: gradient 15s ease infinite;
-        }
-        
-        @keyframes gradient {
+        @keyframes bgShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
         
+        .sweet-gradient-bg {
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
+            background-size: 200% 200%;
+            animation: gradientAnim 10s ease infinite;
+        }
+        
+        @keyframes gradientAnim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-navbar {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.50);
+            box-shadow: 0 15px 35px -10px rgba(129, 140, 248, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.50);
+            box-shadow: 0 25px 50px -12px rgba(129, 140, 248, 0.15);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px -10px rgba(129, 140, 248, 0.22);
+            border-color: rgba(255, 255, 255, 0.80);
+        }
+
         .success-animation {
-            animation: success-pulse 2s infinite;
+            animation: success-pulse 2.2s infinite;
         }
         
         @keyframes success-pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+            0% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(16, 185, 129, 0)); }
+            50% { transform: scale(1.08); filter: drop-shadow(0 10px 20px rgba(16, 185, 129, 0.25)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(16, 185, 129, 0)); }
         }
         
         .premium-badge {
-            background: linear-gradient(to right, #f59e0b, #ef4444);
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
             color: white;
-            padding: 2px 8px;
+            padding: 3px 12px;
             border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 10px;
+            font-weight: 700;
             margin-left: 6px;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
             animation: badge-pulse 2s infinite;
         }
         
         @keyframes badge-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+            70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
             100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
         
-        .card {
-            transition: all 0.3s ease;
+        .btn-sweet {
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+            box-shadow: 0 10px 20px -5px rgba(129, 140, 248, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 16px;
         }
         
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        .btn-sweet:hover {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(129, 140, 248, 0.5);
         }
         
-        .btn-hover {
-            transition: all 0.3s ease;
-            background-size: 200% auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        .floating-sweet {
+            animation: floatingSweet 4s ease-in-out infinite;
         }
         
-        .btn-hover:hover {
-            background-position: right center;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+        @keyframes floatingSweet {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
         
         .sparkle {
@@ -100,32 +130,32 @@
         .sparkle::after {
             content: "";
             position: absolute;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'%3E%3C/polygon%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23c084fc' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'%3E%3C/polygon%3E%3C/svg%3E");
             background-size: contain;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             opacity: 0.7;
             animation: twinkle 3s ease-in-out infinite;
         }
         
         .sparkle::before {
-            top: -10px;
-            left: -10px;
+            top: -16px;
+            left: -16px;
             animation-delay: 0s;
         }
         
         .sparkle::after {
-            bottom: -5px;
-            right: -5px;
-            animation-delay: 1s;
+            bottom: -10px;
+            right: -10px;
+            animation-delay: 1.5s;
         }
         
         @keyframes twinkle {
             0% { transform: scale(1) rotate(0deg); opacity: 0.7; }
-            50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
+            50% { transform: scale(1.4) rotate(180deg); opacity: 1; }
             100% { transform: scale(1) rotate(360deg); opacity: 0.7; }
         }
-
+        
         .language-dropdown {
             position: relative;
             display: inline-block;
@@ -134,13 +164,21 @@
         .language-dropdown-content {
             display: none;
             position: absolute;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 140px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            z-index: 10;
+            border-radius: 14px;
             overflow: hidden;
             right: 0;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .language-dropdown:hover .language-dropdown-content {
@@ -148,165 +186,183 @@
         }
 
         .language-option {
-            padding: 12px 16px;
+            padding: 10px 16px;
             text-decoration: none;
             display: block;
-            color: #333;
+            color: #4b5563;
             transition: all 0.2s;
+            font-size: 14px;
         }
 
         .language-option:hover {
-            background-color: #f1f1f1;
+            background-color: #f5f3ff;
+            color: #818cf8;
         }
 
         .language-active {
-            background-color: #f1f5ff;
+            background-color: #e0e7ff;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+
+        .details-card {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(229, 231, 235, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .details-card:hover {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 12px 25px -10px rgba(0,0,0,0.05);
+            border-color: rgba(192, 132, 252, 0.3);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
-    <div class="gradient-bg text-white shadow-lg">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <i class="fas fa-video text-2xl mr-2 floating"></i>
-                <span class="font-bold text-xl">{{ t.title }}</span>
-            </div>
-            <div class="flex items-center space-x-6">
-                <a href="{{ url_for('index') }}" class="hover:text-gray-200 transition-all duration-300 font-medium">{{ t.home }}</a>
-                <a href="{{ url_for('about') }}" class="hover:text-gray-200 transition-all duration-300 font-medium">{{ t.about }}</a>
-                <div class="language-dropdown">
-                    <button class="flex items-center hover:text-gray-200 transition-all duration-300 font-medium">
-                        <i class="fas fa-globe mr-2"></i>
-                        {{ t.language }}
-                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                    </button>
-                    <div class="language-dropdown-content">
-                        <a href="{{ url_for('set_language', lang='en') }}" class="language-option {% if lang == 'en' %}language-active{% endif %} flex items-center">
-                            <span class="fi fi-gb mr-2"></span>English
-                        </a>
-                        <a href="{{ url_for('set_language', lang='tr') }}" class="language-option {% if lang == 'tr' %}language-active{% endif %} flex items-center">
-                            <span class="fi fi-tr mr-2"></span>Türkçe
-                        </a>
+<body class="min-h-screen text-gray-800 flex flex-col justify-between">
+    <div>
+        <!-- Header/Navbar -->
+        <header class="container mx-auto px-6 pt-6 relative z-50 animate-fade-in" data-aos="fade-down" data-aos-duration="600">
+            <div class="glass-navbar px-6 py-4 flex justify-between items-center rounded-3xl">
+                <a href="{{ url_for('index') }}" class="flex items-center space-x-3 group">
+                    <div class="bg-gradient-to-tr from-indigo-500 to-pink-500 p-2.5 rounded-2xl text-white shadow-md shadow-indigo-200/50 group-hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-magic text-lg"></i>
+                    </div>
+                    <span class="font-extrabold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 font-heading">{{ t.title }}</span>
+                </a>
+                <div class="flex items-center space-x-8">
+                    <a href="{{ url_for('index') }}" class="text-gray-600 hover:text-indigo-600 transition-all duration-300 font-semibold text-sm flex items-center space-x-1.5 py-1.5 border-b-2 border-transparent hover:border-indigo-500/50">
+                        <i class="fas fa-home text-xs opacity-75"></i>
+                        <span>{{ t.home }}</span>
+                    </a>
+                    <a href="{{ url_for('about') }}" class="text-gray-600 hover:text-indigo-600 transition-all duration-300 font-semibold text-sm flex items-center space-x-1.5 py-1.5 border-b-2 border-transparent hover:border-indigo-500/50">
+                        <i class="fas fa-circle-info text-xs opacity-75"></i>
+                        <span>{{ t.about }}</span>
+                    </a>
+                    <div class="language-dropdown">
+                        <button class="text-gray-600 hover:text-indigo-600 transition-all duration-300 font-semibold text-sm flex items-center space-x-1.5 py-1.5">
+                            <i class="fas fa-globe text-xs opacity-75"></i>
+                            <span>{{ t.language }}</span>
+                            <i class="fas fa-chevron-down text-[9px] opacity-75 font-bold"></i>
+                        </button>
+                        <div class="language-dropdown-content">
+                            <a href="{{ url_for('set_language', lang='en') }}" class="language-option {% if lang == 'en' %}language-active{% endif %} flex items-center">
+                                <span class="fi fi-gb mr-2"></span>English
+                            </a>
+                            <a href="{{ url_for('set_language', lang='tr') }}" class="language-option {% if lang == 'tr' %}language-active{% endif %} flex items-center">
+                                <span class="fi fi-tr mr-2"></span>Türkçe
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </nav>
-    </div>
+        </header>
 
-    <div class="container mx-auto px-6 py-12">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-xl p-8 text-center card" data-aos="fade-up" data-aos-duration="1000">
-                <div class="success-animation mb-8 text-green-500 sparkle">
-                    <i class="fas fa-check-circle text-7xl"></i>
-                </div>
-                
-                <h1 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-600" data-aos="fade-up" data-aos-delay="200">{{ t.download_success }}</h1>
-                <p class="text-xl text-gray-600 mb-10" data-aos="fade-up" data-aos-delay="300">{{ t.processed_ready }}</p>
-                
-                <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-8 rounded-2xl mb-10 shadow-inner" data-aos="fade-up" data-aos-delay="400">
-                    <h2 class="text-2xl font-bold mb-6 text-gray-800 flex items-center justify-center">
-                        <i class="fas fa-info-circle mr-3 text-indigo-500"></i>
-                        {{ t.video_details }}
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-white p-5 rounded-xl shadow-md transition-all duration-300 hover:shadow-lg" data-aos="fade-right" data-aos-delay="500">
-                            <h3 class="text-lg font-semibold mb-4 text-gray-700">{{ t.content_info }}</h3>
-                            <p class="text-gray-700 mb-3 flex items-center">
-                                <i class="fas fa-film text-indigo-500 mr-3 w-5"></i>
-                                <span><strong>{{ t.title_label }}:</strong> {{ video_title }}</span>
-                            </p>
-                            <p class="text-gray-700 mb-3 flex items-center">
-                                <i class="fas fa-file text-indigo-500 mr-3 w-5"></i>
-                                <span><strong>{{ t.file_label }}:</strong> {{ filename }}</span>
-                            </p>
+        <div class="container mx-auto px-6 py-12">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-[32px] p-8 md:p-10 text-center glass-card" data-aos="fade-up" data-aos-duration="800">
+                    <div class="success-animation mb-6 text-emerald-500 sparkle inline-block">
+                        <div class="bg-emerald-100 p-4 rounded-full">
+                            <i class="fas fa-circle-check text-6xl"></i>
                         </div>
-                        <div class="bg-white p-5 rounded-xl shadow-md transition-all duration-300 hover:shadow-lg" data-aos="fade-left" data-aos-delay="600">
-                            <h3 class="text-lg font-semibold mb-4 text-gray-700">{{ t.quality_info }}</h3>
-                            <p class="text-gray-700 mb-3 flex items-center">
-                                <i class="fas fa-expand text-indigo-500 mr-3 w-5"></i>
-                                <span><strong>{{ t.resolution }}:</strong> <span class="text-green-600 font-semibold">{{ resolution }}</span></span>
-                            </p>
-                            <p class="text-gray-700 mb-3 flex items-center">
-                                <i class="fas fa-photo-video text-indigo-500 mr-3 w-5"></i>
-                                <span>
-                                    <strong>{{ t.format }}:</strong> 
-                                    <span class="text-green-600 font-semibold">{{ format_note }}</span>
+                    </div>
+                    
+                    <h1 class="text-3xl md:text-4xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-teal-600 font-heading tracking-tight" data-aos="fade-up" data-aos-delay="100">{{ t.download_success }}</h1>
+                    <p class="text-gray-500 mb-8 text-sm md:text-base font-medium" data-aos="fade-up" data-aos-delay="200">{{ t.processed_ready }}</p>
+                    
+                    <div class="bg-gradient-to-br from-indigo-50/40 to-pink-50/40 p-6 md:p-8 rounded-[24px] border border-indigo-100/50 mb-8" data-aos="fade-up" data-aos-delay="300">
+                        <h2 class="text-lg font-bold mb-6 text-gray-800 flex items-center justify-center font-heading">
+                            <i class="fas fa-circle-info mr-2.5 text-indigo-500"></i>
+                            {{ t.video_details }}
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="details-card p-5 rounded-2xl text-left" data-aos="fade-right" data-aos-delay="400">
+                                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">{{ t.content_info }}</h3>
+                                <p class="text-gray-700 text-sm mb-3 flex items-start">
+                                    <i class="fas fa-video text-indigo-400 mt-1 mr-3 w-4"></i>
+                                    <span><strong class="text-gray-800">{{ t.title_label }}:</strong> <span class="break-words font-medium">{{ video_title }}</span></span>
+                                </p>
+                                <p class="text-gray-700 text-sm flex items-start">
+                                    <i class="fas fa-file-invoice text-indigo-400 mt-1 mr-3 w-4"></i>
+                                    <span><strong class="text-gray-800">{{ t.file_label }}:</strong> <span class="break-all font-medium">{{ filename }}</span></span>
+                                </p>
+                            </div>
+                            <div class="details-card p-5 rounded-2xl text-left" data-aos="fade-left" data-aos-delay="500">
+                                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">{{ t.quality_info }}</h3>
+                                <p class="text-gray-700 text-sm mb-3 flex items-center">
+                                    <i class="fas fa-expand text-indigo-400 mr-3 w-4"></i>
+                                    <span><strong class="text-gray-800">{{ t.resolution }}:</strong> <span class="text-indigo-600 font-bold ml-1">{{ resolution }}</span></span>
+                                </p>
+                                <p class="text-gray-700 text-sm mb-3 flex items-center">
+                                    <i class="fas fa-photo-film text-indigo-400 mr-3 w-4"></i>
+                                    <span>
+                                        <strong class="text-gray-800">{{ t.format }}:</strong> 
+                                        <span class="text-indigo-600 font-bold ml-1">{{ format_note }}</span>
+                                        {% if file_extension.lower() == 'mov' %}
+                                        <span class="premium-badge">{{ t.ultra_hd_badge }}</span>
+                                        {% endif %}
+                                    </span>
+                                </p>
+                                <p class="text-gray-700 text-sm flex items-center">
+                                    <i class="fas fa-circle-play text-indigo-400 mr-3 w-4"></i>
+                                    <span>
+                                        <strong class="text-gray-800">{{ t.file_type }}:</strong> 
+                                        <span class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-md text-xs font-bold ml-1">{{ file_extension|upper }}</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 rounded-xl border {% if file_extension.lower() == 'mov' %}bg-gradient-to-r from-yellow-50/70 to-amber-50/70 border-yellow-100/50 text-yellow-800{% else %}bg-gradient-to-r from-blue-50/70 to-indigo-50/70 border-blue-100/50 text-blue-800{% endif %}" data-aos="fade-up" data-aos-delay="600">
+                            <p class="flex items-center justify-center text-xs md:text-sm leading-relaxed">
+                                <i class="fas {% if file_extension.lower() == 'mov' %}fa-crown text-yellow-500{% else %}fa-sparkles text-indigo-500{% endif %} mr-3 text-lg animate-pulse"></i>
+                                <span class="font-medium">
                                     {% if file_extension.lower() == 'mov' %}
-                                    <span class="premium-badge">{{ t.ultra_hd_badge }}</span>
+                                    {{ t.mov_quality_message }}
+                                    {% else %}
+                                    {{ t.original_quality_message }}
                                     {% endif %}
-                                </span>
-                            </p>
-                            <p class="text-gray-700 mb-3 flex items-center">
-                                <i class="fas fa-file-video text-indigo-500 mr-3 w-5"></i>
-                                <span>
-                                    <strong>{{ t.file_type }}:</strong> 
-                                    <span class="text-green-600 font-semibold">{{ file_extension|upper }}</span>
                                 </span>
                             </p>
                         </div>
                     </div>
                     
-                    <div class="mt-6 p-4 {% if file_extension.lower() == 'mov' %}bg-gradient-to-r from-yellow-50 to-amber-50 border-yellow-100{% else %}bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-100{% endif %} rounded-xl border shadow-inner" data-aos="fade-up" data-aos-delay="700">
-                        <p class="{% if file_extension.lower() == 'mov' %}text-yellow-700{% else %}text-blue-700{% endif %} flex items-center justify-center">
-                            <i class="fas {% if file_extension.lower() == 'mov' %}fa-crown{% else %}fa-info-circle{% endif %} mr-3 text-xl"></i>
-                            <span class="text-base">
-                                {% if file_extension.lower() == 'mov' %}
-                                {{ t.mov_quality_message }}
-                                {% else %}
-                                {{ t.original_quality_message }}
-                                {% endif %}
-                            </span>
-                        </p>
+                    <a href="{{ download_url }}" class="btn-sweet text-white font-bold py-4 px-10 text-md inline-flex items-center space-x-3" data-aos="zoom-in" data-aos-delay="700">
+                        <i class="fas fa-cloud-arrow-down text-lg"></i> 
+                        <span>{{ t.download_now }}</span>
+                    </a>
+                    
+                    <div class="mt-8" data-aos="fade-up" data-aos-delay="800">
+                        <a href="{{ url_for('index') }}" class="text-indigo-600 hover:text-indigo-800 transition-all duration-300 flex items-center justify-center text-xs font-bold">
+                            <i class="fas fa-arrow-left mr-2"></i> {{ t.back_home }}
+                        </a>
                     </div>
                 </div>
                 
-                <a href="{{ download_url }}" class="gradient-bg inline-flex items-center px-10 py-5 border-0 rounded-xl text-lg font-bold text-white focus:outline-none transition duration-300 ease-in-out btn-hover" data-aos="zoom-in" data-aos-delay="800">
-                    <i class="fas fa-download mr-3 text-xl"></i> {{ t.download_now }}
-                </a>
-                
-                <div class="mt-10" data-aos="fade-up" data-aos-delay="900">
-                    <a href="{{ url_for('index') }}" class="text-indigo-600 hover:text-indigo-800 transition-all duration-300 flex items-center justify-center text-lg">
-                        <i class="fas fa-arrow-left mr-2"></i> {{ t.back_home }}
-                    </a>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-2xl shadow-xl p-8 mt-10 card" data-aos="fade-up" data-aos-delay="1000">
-                <div class="text-center">
-                    <h2 class="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">{{ t.want_more }}</h2>
-                    <p class="text-gray-600 mb-8">{{ t.more_downloads }}</p>
-                    <a href="{{ url_for('index') }}" class="gradient-bg inline-flex items-center px-8 py-4 border-0 rounded-xl text-lg font-medium text-white hover:opacity-90 focus:outline-none transition duration-300 ease-in-out btn-hover">
-                        <i class="fas fa-plus mr-2"></i> {{ t.download_another }}
+                <div class="bg-white rounded-[32px] p-8 mt-10 card border border-gray-100/50 text-center" data-aos="fade-up" data-aos-delay="900">
+                    <h2 class="text-xl font-bold mb-3 text-gray-800 font-heading">{{ t.want_more }}</h2>
+                    <p class="text-sm text-gray-500 mb-6 leading-relaxed">{{ t.more_downloads }}</p>
+                    <a href="{{ url_for('index') }}" class="btn-sweet text-white font-semibold py-3 px-6 text-sm inline-flex items-center space-x-2">
+                        <i class="fas fa-plus"></i> 
+                        <span>{{ t.download_another }}</span>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="gradient-bg text-white py-10 mt-16">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="flex items-center justify-center md:justify-start">
-                        <i class="fas fa-video text-2xl mr-2 floating"></i>
-                        <span class="font-bold text-xl">{{ t.title }}</span>
-                    </div>
-                    <p class="mt-2 text-sm opacity-80">{{ t.footer_text }}</p>
+    <footer class="border-t border-indigo-50/60 relative overflow-hidden bg-white/40 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-10">
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 space-y-4 md:space-y-0">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-magic text-purple-400 text-sm"></i>
+                    <span class="font-bold text-gray-600 font-heading">{{ t.title }}</span>
                 </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-white hover:text-gray-200 transition-all duration-300 transform hover:scale-110">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-gray-200 transition-all duration-300 transform hover:scale-110">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-gray-200 transition-all duration-300 transform hover:scale-110">
-                        <i class="fab fa-instagram text-xl"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-white border-opacity-20 text-center text-sm opacity-70">
                 <p>{{ t.copyright }}</p>
+                <div class="flex items-center space-x-4">
+                    <span><i class="fas fa-heart text-pink-400 mr-1"></i>Türkiye'den yapıldı</span>
+                    <span>•</span>
+                    <span><i class="fas fa-code mr-1"></i>Açık Kaynak</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -318,4 +374,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

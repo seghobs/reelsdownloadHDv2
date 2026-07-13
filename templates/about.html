@@ -14,74 +14,95 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
+            background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 50%, #ecfdf5 100%);
+            background-size: 300% 300%;
+            animation: bgShift 20s ease infinite;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Outfit', sans-serif;
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-            background-size: 200% 200%;
-            animation: gradient 15s ease infinite;
-        }
-        
-        @keyframes gradient {
+        @keyframes bgShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
         
-        .card {
+        .sweet-gradient-bg {
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
+            background-size: 200% 200%;
+            animation: gradientAnim 10s ease infinite;
+        }
+        
+        @keyframes gradientAnim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-navbar {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.50);
+            box-shadow: 0 15px 35px -10px rgba(129, 140, 248, 0.08);
             transition: all 0.3s ease;
-            border-radius: 16px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.50);
+            box-shadow: 0 25px 50px -12px rgba(129, 140, 248, 0.15);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px -10px rgba(129, 140, 248, 0.22);
+            border-color: rgba(255, 255, 255, 0.80);
         }
         
-        .btn-hover {
-            transition: all 0.3s ease;
-            background-size: 200% auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .btn-hover:hover {
-            background-position: right center;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .feature-icon {
+        .feature-icon-sweet {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            height: 3rem;
-            width: 3rem;
-            border-radius: 0.75rem;
-            background: linear-gradient(135deg, #6366f1, #a855f7);
-            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
-            color: white;
-            transition: all 0.3s ease;
+            height: 3.5rem;
+            width: 3.5rem;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #fce7f3 100%);
+            color: #818cf8;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 16px rgba(129, 140, 248, 0.08);
+            flex-shrink: 0;
         }
         
-        .feature-icon:hover {
-            transform: scale(1.1) rotate(5deg);
+        .feature-icon-sweet:hover {
+            transform: scale(1.1) rotate(6deg);
+            background: linear-gradient(135deg, #818cf8 0%, #f472b6 100%);
+            color: white;
+            box-shadow: 0 12px 20px rgba(129, 140, 248, 0.25);
         }
-
+        
+        .floating-sweet {
+            animation: floatingSweet 4s ease-in-out infinite;
+        }
+        
+        @keyframes floatingSweet {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
         .language-dropdown {
             position: relative;
             display: inline-block;
@@ -90,13 +111,21 @@
         .language-dropdown-content {
             display: none;
             position: absolute;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 140px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            z-index: 10;
+            border-radius: 14px;
             overflow: hidden;
             right: 0;
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .language-dropdown:hover .language-dropdown-content {
@@ -104,129 +133,134 @@
         }
 
         .language-option {
-            padding: 12px 16px;
+            padding: 10px 16px;
             text-decoration: none;
             display: block;
-            color: #333;
+            color: #4b5563;
             transition: all 0.2s;
+            font-size: 14px;
         }
 
         .language-option:hover {
-            background-color: #f1f1f1;
+            background-color: #f5f3ff;
+            color: #818cf8;
         }
 
         .language-active {
-            background-color: #f1f5ff;
+            background-color: #e0e7ff;
+            color: #4f46e5;
+            font-weight: 600;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
-    <div class="gradient-bg text-white shadow-lg">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <i class="fas fa-video text-2xl mr-2 floating"></i>
-                <span class="font-bold text-xl">{{ t.title }}</span>
-            </div>
-            <div class="flex items-center space-x-6">
-                <a href="{{ url_for('index') }}" class="hover:text-gray-200 transition-all duration-300 font-medium">{{ t.home }}</a>
-                <a href="{{ url_for('about') }}" class="hover:text-gray-200 transition-all duration-300 font-medium">{{ t.about }}</a>
-                <div class="language-dropdown">
-                    <button class="flex items-center hover:text-gray-200 transition-all duration-300 font-medium">
-                        <i class="fas fa-globe mr-2"></i>
-                        {{ t.language }}
-                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                    </button>
-                    <div class="language-dropdown-content">
-                        <a href="{{ url_for('set_language', lang='en') }}" class="language-option {% if lang == 'en' %}language-active{% endif %} flex items-center">
-                            <span class="fi fi-gb mr-2"></span>English
-                        </a>
-                        <a href="{{ url_for('set_language', lang='tr') }}" class="language-option {% if lang == 'tr' %}language-active{% endif %} flex items-center">
-                            <span class="fi fi-tr mr-2"></span>Türkçe
-                        </a>
+<body class="min-h-screen text-gray-800 flex flex-col justify-between">
+    <div>
+        <!-- Header/Navbar -->
+        <header class="container mx-auto px-6 pt-6 relative z-50 animate-fade-in" data-aos="fade-down" data-aos-duration="600">
+            <div class="glass-navbar px-6 py-4 flex justify-between items-center rounded-3xl">
+                <a href="{{ url_for('index') }}" class="flex items-center space-x-3 group">
+                    <div class="bg-gradient-to-tr from-indigo-500 to-pink-500 p-2.5 rounded-2xl text-white shadow-md shadow-indigo-200/50 group-hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-magic text-lg"></i>
                     </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-
-    <div class="container mx-auto px-6 py-12">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-xl p-8 mb-12 card" data-aos="fade-up" data-aos-duration="1000">
-                <h1 class="text-4xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">{{ t.about }} {{ t.title }}</h1>
-                
-                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl border border-indigo-100 mb-8" data-aos="fade-up" data-aos-delay="200">
-                    <p class="text-indigo-700">
-                        {{ t.about_description }}
-                    </p>
-                </div>
-                
-                <div class="space-y-8" data-aos="fade-up" data-aos-delay="300">
-                    <div class="flex items-start">
-                        <div class="feature-icon mr-4 mt-1">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ t.about_mission_title }}</h2>
-                            <p class="text-gray-600">{{ t.about_mission_text }}</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start" data-aos="fade-up" data-aos-delay="400">
-                        <div class="feature-icon mr-4 mt-1">
-                            <i class="fas fa-cog"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ t.about_tech_title }}</h2>
-                            <p class="text-gray-600">{{ t.about_tech_text }}</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start" data-aos="fade-up" data-aos-delay="500">
-                        <div class="feature-icon mr-4 mt-1">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ t.about_privacy_title }}</h2>
-                            <p class="text-gray-600">{{ t.about_privacy_text }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl shadow-xl p-8 text-white text-center card" data-aos="fade-up" data-aos-delay="600">
-                <h2 class="text-3xl font-bold mb-4">{{ t.about_start_title }}</h2>
-                <p class="text-lg mb-6 opacity-90">{{ t.about_start_text }}</p>
-                <a href="{{ url_for('index') }}" class="inline-block bg-white text-indigo-600 font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    {{ t.start_downloading }}
+                    <span class="font-extrabold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 font-heading">{{ t.title }}</span>
                 </a>
+                <div class="flex items-center space-x-8">
+                    <a href="{{ url_for('index') }}" class="text-gray-600 hover:text-indigo-600 transition-all duration-300 font-semibold text-sm flex items-center space-x-1.5 py-1.5 border-b-2 border-transparent hover:border-indigo-500/50">
+                        <i class="fas fa-home text-xs opacity-75"></i>
+                        <span>{{ t.home }}</span>
+                    </a>
+                    <a href="{{ url_for('about') }}" class="text-gray-600 hover:text-indigo-600 transition-all duration-300 font-semibold text-sm flex items-center space-x-1.5 py-1.5 border-b-2 border-transparent hover:border-indigo-500/50">
+                        <i class="fas fa-circle-info text-xs opacity-75"></i>
+                        <span>{{ t.about }}</span>
+                    </a>
+                    <div class="language-dropdown">
+                        <button class="text-gray-600 hover:text-indigo-600 transition-all duration-300 font-semibold text-sm flex items-center space-x-1.5 py-1.5">
+                            <i class="fas fa-globe text-xs opacity-75"></i>
+                            <span>{{ t.language }}</span>
+                            <i class="fas fa-chevron-down text-[9px] opacity-75 font-bold"></i>
+                        </button>
+                        <div class="language-dropdown-content">
+                            <a href="{{ url_for('set_language', lang='en') }}" class="language-option {% if lang == 'en' %}language-active{% endif %} flex items-center">
+                                <span class="fi fi-gb mr-2"></span>English
+                            </a>
+                            <a href="{{ url_for('set_language', lang='tr') }}" class="language-option {% if lang == 'tr' %}language-active{% endif %} flex items-center">
+                                <span class="fi fi-tr mr-2"></span>Türkçe
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container mx-auto px-6 py-12">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-[32px] p-8 md:p-10 mb-12 glass-card" data-aos="fade-up" data-aos-duration="800">
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-heading tracking-tight leading-tight">{{ t.about }} {{ t.title }}</h1>
+                    
+                    <div class="bg-gradient-to-br from-indigo-50/50 to-pink-50/50 p-6 rounded-[20px] border border-indigo-100/40 mb-10 shadow-inner" data-aos="fade-up" data-aos-delay="100">
+                        <p class="text-indigo-700 text-sm md:text-base font-medium leading-relaxed">
+                            {{ t.about_description }}
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-8" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-start">
+                            <div class="feature-icon-sweet mr-5">
+                                <i class="fas fa-rocket text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-bold text-gray-800 mb-2 font-heading">{{ t.about_mission_title }}</h2>
+                                <p class="text-sm text-gray-500 leading-relaxed font-medium">{{ t.about_mission_text }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start" data-aos="fade-up" data-aos-delay="300">
+                            <div class="feature-icon-sweet mr-5">
+                                <i class="fas fa-sliders text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-bold text-gray-800 mb-2 font-heading">{{ t.about_tech_title }}</h2>
+                                <p class="text-sm text-gray-500 leading-relaxed font-medium">{{ t.about_tech_text }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start" data-aos="fade-up" data-aos-delay="400">
+                            <div class="feature-icon-sweet mr-5">
+                                <i class="fas fa-shield-heart text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-bold text-gray-800 mb-2 font-heading">{{ t.about_privacy_title }}</h2>
+                                <p class="text-sm text-gray-500 leading-relaxed font-medium">{{ t.about_privacy_text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sweet-gradient-bg rounded-[32px] p-8 md:p-10 text-white text-center shadow-lg relative overflow-hidden mb-12" data-aos="fade-up" data-aos-delay="500">
+                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold mb-3 font-heading tracking-tight">{{ t.about_start_title }}</h2>
+                    <p class="text-sm md:text-base mb-6 opacity-90 leading-relaxed">{{ t.about_start_text }}</p>
+                    <a href="{{ url_for('index') }}" class="inline-block bg-white text-purple-600 font-bold py-3 px-8 rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition duration-300">
+                        {{ t.start_downloading }}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <footer class="gradient-bg text-white py-10 mt-16">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="flex items-center justify-center md:justify-start">
-                        <i class="fas fa-video text-2xl mr-2 floating"></i>
-                        <span class="font-bold text-xl">{{ t.title }}</span>
-                    </div>
-                    <p class="mt-2 text-sm opacity-80">{{ t.footer_text }}</p>
+    <footer class="border-t border-indigo-50/60 relative overflow-hidden bg-white/40 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-10">
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 space-y-4 md:space-y-0">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-magic text-purple-400 text-sm"></i>
+                    <span class="font-bold text-gray-600 font-heading">{{ t.title }}</span>
                 </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-white hover:text-gray-200 transition-all duration-300 transform hover:scale-110">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-gray-200 transition-all duration-300 transform hover:scale-110">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-gray-200 transition-all duration-300 transform hover:scale-110">
-                        <i class="fab fa-instagram text-xl"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-white border-opacity-20 text-center text-sm opacity-70">
                 <p>{{ t.copyright }}</p>
+                <div class="flex items-center space-x-4">
+                    <span><i class="fas fa-heart text-pink-400 mr-1"></i>Türkiye'den yapıldı</span>
+                    <span>•</span>
+                    <span><i class="fas fa-code mr-1"></i>Açık Kaynak</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -238,4 +272,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
