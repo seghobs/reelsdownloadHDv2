@@ -236,6 +236,62 @@ def get_available_formats(url):
             'quality': 0,
         }], 'Video'
 
+def transcode_video(filepath, instagram_compatible=False):
+    """
+    Transcode the downloaded video file to standard H.264 / AAC 8-bit to ensure
+    maximum compatibility with Adobe Premiere Pro and standard video editors.
+    """
+    if not filepath or not os.path.exists(filepath):
+        return filepath
+
+    import subprocess
+    temp_output_path = os.path.splitext(filepath)[0] + "_transcoded" + os.path.splitext(filepath)[1]
+    
+    ffmpeg_cmd = ['ffmpeg', '-y', '-i', filepath]
+    
+    if instagram_compatible:
+        ffmpeg_cmd.extend([
+            '-c:v', 'libx264',
+            '-profile:v', 'high',
+            '-level', '4.2',
+            '-pix_fmt', 'yuv420p',
+            '-crf', '18',
+            '-preset', 'slow',
+            '-movflags', '+faststart',
+            '-c:a', 'aac',
+            '-b:a', '128k',
+            '-ar', '44100',
+            '-ac', '2'
+        ])
+    else:
+        ffmpeg_cmd.extend([
+            '-c:v', 'libx264',
+            '-crf', '15',
+            '-preset', 'slow',
+            '-pix_fmt', 'yuv420p',
+            '-c:a', 'aac',
+            '-b:a', '256k'
+        ])
+    
+    ffmpeg_cmd.append(temp_output_path)
+    
+    try:
+        print(f"Running custom ffmpeg transcoding: {' '.join(ffmpeg_cmd)}")
+        result = subprocess.run(ffmpeg_cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        if os.path.exists(temp_output_path):
+            os.remove(filepath)
+            os.rename(temp_output_path, filepath)
+            print("Transcoding completed successfully!")
+    except Exception as e:
+        print(f"Custom ffmpeg transcoding failed: {str(e)}")
+        if os.path.exists(temp_output_path):
+            try:
+                os.remove(temp_output_path)
+            except Exception:
+                pass
+    return filepath
+
 def download_reel(url, output_dir, format_id=None, convert_to_mov=False, instagram_compatible=False):
     """
     Download Instagram Reels video in specified quality
@@ -314,7 +370,14 @@ def download_reel(url, output_dir, format_id=None, convert_to_mov=False, instagr
     else:
         # Original high quality parameters (compatible with Premiere Pro and video editors)
         ydl_opts['postprocessor_args'] = {
-            'FFmpegVideoConvertor': ['-crf', '15', '-preset', 'slow', '-pix_fmt', 'yuv420p'],
+            'FFmpegVideoConvertor': [
+                '-c:v', 'libx264',
+                '-crf', '15',
+                '-preset', 'slow',
+                '-pix_fmt', 'yuv420p',
+                '-c:a', 'aac',
+                '-b:a', '256k'
+            ],
         }
     
     try:
@@ -337,6 +400,7 @@ def download_reel(url, output_dir, format_id=None, convert_to_mov=False, instagr
                 print(f"Format: {format_note}")
                 print(f"Extension: {ext}")
                 
+                filepath = transcode_video(filepath, instagram_compatible)
                 return filepath, video_title, f"{width}x{height}", format_note, ext
             else:
                 print("No requested downloads found in info")
@@ -359,6 +423,7 @@ def download_reel(url, output_dir, format_id=None, convert_to_mov=False, instagr
                     ext = os.path.splitext(filepath)[1][1:]
                     
                     print(f"Successfully downloaded with fallback format: {video_title}")
+                    filepath = transcode_video(filepath, instagram_compatible)
                     return filepath, video_title, f"{width}x{height}", format_note, ext
                 else:
                     return None, video_title, "Unknown", "Unknown", "Unknown"
