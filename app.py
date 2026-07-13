@@ -312,9 +312,9 @@ def download_reel(url, output_dir, format_id=None, convert_to_mov=False, instagr
             ],
         }
     else:
-        # Original high quality parameters
+        # Original high quality parameters (compatible with Premiere Pro and video editors)
         ydl_opts['postprocessor_args'] = {
-            'FFmpegVideoConvertor': ['-crf', '0', '-preset', 'veryslow', '-pix_fmt', 'yuv420p10le'],
+            'FFmpegVideoConvertor': ['-crf', '15', '-preset', 'slow', '-pix_fmt', 'yuv420p'],
         }
     
     try:
