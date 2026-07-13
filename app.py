@@ -84,8 +84,9 @@ translations = {
         'about_privacy_text': 'We respect your privacy. We don\'t store your videos permanently, and all downloads are deleted automatically after a short period. We don\'t track or store any personal information.',
         'about_start_title': 'Ready to download your first Reel?',
         'about_start_text': 'Start downloading Instagram Reels in original quality now!',
-        'originalize': 'Originalize Video (1% Slower - Algorithm Bypass)',
-        'originalize_note': 'Slightly slows down the video speed by 1% and syncs audio tempo to bypass duplicate content and copyright matching algorithms.',
+        'originalize': 'Originalize Video (Slowdown Rate)',
+        'originalize_note': 'Slightly slows down the video speed and changes the audio tempo to bypass duplicate content and copyright matching algorithms.',
+        'normal_speed': 'Normal Speed',
     },
     'tr': {
         'title': 'HD Reels İndirici',
@@ -155,8 +156,9 @@ translations = {
         'about_privacy_text': 'Gizliliğinize saygı duyuyoruz. Videolarınızı kalıcı olarak saklamıyoruz ve tüm indirmeler kısa bir süre sonra otomatik olarak siliniyor. Hiçbir kişisel bilgiyi takip etmiyor veya saklamıyoruz.',
         'about_start_title': 'İlk Reel\'inizi indirmeye hazır mısınız?',
         'about_start_text': 'Instagram Reels\'i orijinal kalitede şimdi indirmeye başlayın!',
-        'originalize': 'Videoyu Özgünleştir (%1 Yavaşlat - Algoritma Uyumlu)',
-        'originalize_note': 'Telif ve kopya içerik tespiti algoritmalarını aşmak için video hızını hafifçe %1 yavaşlatır ve ses temposunu senkronize eder.',
+        'originalize': 'Videoyu Özgünleştir (Hız Ayarı)',
+        'originalize_note': 'Telif ve kopya içerik tespiti algoritmalarını aşmak için video hızını hafifçe yavaşlatır ve ses temposunu senkronize eder.',
+        'normal_speed': 'Normal Hız',
     }
 }
 
@@ -240,7 +242,7 @@ def get_available_formats(url):
             'quality': 0,
         }], 'Video'
 
-def transcode_video(filepath, instagram_compatible=False, originalize=False):
+def transcode_video(filepath, instagram_compatible=False, slowdown_percent=0):
     """
     Transcode the downloaded video file to standard H.264 / AAC 8-bit to ensure
     maximum compatibility with Adobe Premiere Pro and standard video editors.
@@ -277,10 +279,12 @@ def transcode_video(filepath, instagram_compatible=False, originalize=False):
             '-b:a', '256k'
         ])
 
-    if originalize:
+    if slowdown_percent > 0:
+        setpts_val = 1.0 + (slowdown_percent / 100.0)
+        atempo_val = 1.0 - (slowdown_percent / 100.0)
         ffmpeg_cmd.extend([
-            '-vf', 'setpts=1.01*PTS',
-            '-af', 'atempo=0.99'
+            '-vf', f'setpts={setpts_val:.2f}*PTS',
+            '-af', f'atempo={atempo_val:.2f}'
         ])
 
     ffmpeg_cmd.extend([
@@ -309,7 +313,7 @@ def transcode_video(filepath, instagram_compatible=False, originalize=False):
                 pass
     return filepath
 
-def download_reel(url, output_dir, format_id=None, convert_to_mov=False, instagram_compatible=False, originalize=False):
+def download_reel(url, output_dir, format_id=None, convert_to_mov=False, instagram_compatible=False, slowdown_percent=0):
     """
     Download Instagram Reels video in specified quality
     
@@ -417,7 +421,7 @@ def download_reel(url, output_dir, format_id=None, convert_to_mov=False, instagr
                 print(f"Format: {format_note}")
                 print(f"Extension: {ext}")
                 
-                filepath = transcode_video(filepath, instagram_compatible, originalize)
+                filepath = transcode_video(filepath, instagram_compatible, slowdown_percent)
                 return filepath, video_title, f"{width}x{height}", format_note, ext
             else:
                 print("No requested downloads found in info")
@@ -440,7 +444,7 @@ def download_reel(url, output_dir, format_id=None, convert_to_mov=False, instagr
                     ext = os.path.splitext(filepath)[1][1:]
                     
                     print(f"Successfully downloaded with fallback format: {video_title}")
-                    filepath = transcode_video(filepath, instagram_compatible, originalize)
+                    filepath = transcode_video(filepath, instagram_compatible, slowdown_percent)
                     return filepath, video_title, f"{width}x{height}", format_note, ext
                 else:
                     return None, video_title, "Unknown", "Unknown", "Unknown"
@@ -492,7 +496,10 @@ def download():
         format_id = request.form.get('format_id')
         convert_to_mov = request.form.get('convert_to_mov') == 'true'
         instagram_compatible = request.form.get('instagram_compatible') == 'true'
-        originalize = request.form.get('originalize') == 'true'
+        try:
+            slowdown_percent = int(request.form.get('slowdown_percent', 0))
+        except ValueError:
+            slowdown_percent = 0
         
         if not url:
             flash('Please enter a valid URL', 'error')
@@ -518,7 +525,7 @@ def download():
                 format_id=format_id,
                 convert_to_mov=convert_to_mov,
                 instagram_compatible=instagram_compatible,
-                originalize=originalize
+                slowdown_percent=slowdown_percent
             )
             
             if filepath and os.path.exists(filepath):
